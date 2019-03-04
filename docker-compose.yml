@@ -12,6 +12,18 @@ services:
       - FLASK_APP=application.py
       - FLASK_DEBUG=1
       - 'RUN=flask run --port 8000 --host 0.0.0.0'
+      - TWITTER_TOKEN=262332119-7bclllngLikvfVFAqgSe1cRNUE0cnVSYD2YOX7Ju
+      - TWITTER_TOKEN_SECRET=aRTJHmcY6szoRLCfHZccTkCqX7yrL3B4fYjwB5ZrI
     command: flask run --port 8000 --host 0.0.0.0
     # Infinite loop, to keep it alive, for debugging
     # command: bash -c "while true; do echo 'sleeping...' && sleep 10; done"
+  frontend:
+    image: node:latest
+    command: bash -c "yarn && yarn build && yarn dev"
+    working_dir: /app/frontend
+    volumes_from:
+    - web
+    ports:
+    - "8080:8080"
+    depends_on:
+    - web

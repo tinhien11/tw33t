@@ -6,11 +6,15 @@ from flask import jsonify
 from flask.views import MethodView
 from tw33t.utils.twitter_client import twitter11, TwitterHTTPError
 from tw33t.utils.logger import logger_twitter_handle
+import requests
 
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
+    if app.debug:
+        # No need CORS extesion
+        return requests.get('http://localhost:8080/{}'.format(path)).text
     return render_template("index.html")
 
 

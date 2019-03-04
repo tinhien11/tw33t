@@ -2,17 +2,17 @@
   <div>
     <p>Home page</p>
 
-    <form id="app"  method="post" @submit.prevent="checkForm">
-      <p v-if="errors.length">
+    <form id="app" method="post" @submit.prevent="checkForm">
+      <div v-if="errors.length">
         <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors">{{ error }}</li>
-      </ul>
-      </p>
+        <ul>
+          <li v-for="error in errors">{{ error }}</li>
+        </ul>
+      </div>
 
       <p>
-        <label for="name">Name<label>
-          <input type="text" name="name" id="name" v-model="name">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" v-model="name">
       </p>
 
       <p>
@@ -29,6 +29,7 @@
 
 <script>
   import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -43,7 +44,7 @@
       },
       getTweetsFromBackend() {
         const username = this.name;
-        const path = `http://localhost:5000/tweets/?user=${username}`
+        const path = `${process.env.BASE_URL}/tweets/?user=${username}`
         axios.get(path)
           .then(response => {
             this.tweets = response.data
