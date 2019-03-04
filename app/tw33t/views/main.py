@@ -5,6 +5,7 @@ from functools import wraps
 from flask import jsonify
 from flask.views import MethodView
 from tw33t.utils.twitter_client import twitter11, TwitterHTTPError
+from tw33t.utils.logger import logger_twitter_handle
 
 
 @app.route("/", methods=['GET'])
@@ -16,6 +17,7 @@ def index():
 class UserAPI(MethodView):
     def get(self, twitter_handle=None):
         try:
+            logger_twitter_handle.info(twitter_handle)
             twitters = twitter11.statuses.user_timeline(screen_name=twitter_handle)
             return jsonify(twitters)
         except TwitterHTTPError as err:
