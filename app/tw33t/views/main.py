@@ -4,7 +4,7 @@ from tw33t import app
 from functools import wraps
 from flask import jsonify
 from flask.views import MethodView
-from tw33t.utils.twitter_client import twitter11
+from tw33t.utils.twitter_client import twitter11, TwitterHTTPError
 
 
 @app.route("/", methods=['GET'])
@@ -15,8 +15,13 @@ def index():
 
 class UserAPI(MethodView):
     def get(self, twitter_handle=None):
-        twitters = twitter11.statuses.user_timeline(screen_name=twitter_handle)
-        return jsonify(twitters)
+        try:
+            twitters = twitter11.statuses.user_timeline(screen_name=twitter_handle)
+            return jsonify(twitters)
+        except TwitterHTTPError as err:
+            abort(err.e.code)
+        except Exception as err:
+            abort(500)
 
 
 app.add_url_rule('/users/<string:twitter_handle>', view_func=UserAPI.as_view('users'))
