@@ -8,10 +8,10 @@ from tw33t.utils.twitter_client import twitter11, TwitterHTTPError
 from tw33t.utils.logger import logger_twitter_handle
 
 
-@app.route("/", methods=['GET'])
-def index():
-
-    return render_template('index.html')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
 
 
 class UserAPI(MethodView):

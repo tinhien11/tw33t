@@ -1,3 +1,7 @@
 *.pyc
 *.pyo
 __pycache__/
+
+app/dist/
+app/frontend/node_modules/
+*.log
