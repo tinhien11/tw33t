@@ -12,9 +12,6 @@ import requests
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    if app.debug:
-        # No need CORS extesion
-        return requests.get('http://localhost:8080/{}'.format(path)).text
     return render_template("index.html")
 
 
@@ -31,4 +28,4 @@ class TweetsAPI(MethodView):
             abort(500)
 
 
-app.add_url_rule('/tweets/', view_func=TweetsAPI.as_view('tweets'))
+app.add_url_rule('/api/v1/tweets/', view_func=TweetsAPI.as_view('tweets'))

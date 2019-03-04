@@ -44,7 +44,7 @@
       },
       getTweetsFromBackend() {
         const username = this.name;
-        const path = `${process.env.BASE_URL}/tweets/?user=${username}`
+        const path = `${process.env.API_URL}/tweets/?user=${username}`
         axios.get(path)
           .then(response => {
             this.tweets = response.data
