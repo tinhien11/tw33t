@@ -14,8 +14,9 @@ def catch_all(path):
     return render_template("index.html")
 
 
-class UserAPI(MethodView):
-    def get(self, twitter_handle=None):
+class TweetsAPI(MethodView):
+    def get(self):
+        twitter_handle = request.args.get('user')
         try:
             logger_twitter_handle.info(twitter_handle)
             twitters = twitter11.statuses.user_timeline(screen_name=twitter_handle)
@@ -26,4 +27,4 @@ class UserAPI(MethodView):
             abort(500)
 
 
-app.add_url_rule('/users/<string:twitter_handle>', view_func=UserAPI.as_view('users'))
+app.add_url_rule('/tweets/', view_func=TweetsAPI.as_view('tweets'))
