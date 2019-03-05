@@ -20,21 +20,24 @@
             <input type="text" placeholder="Enter a twitter handle" v-model="keyword">
             <i class="search icon"></i>
           </div>
-          <button class="ui huge primary button">Search <i class="right arrow icon"></i></button>
+          <button class="ui huge primary button">Submit <i class="right arrow icon"></i></button>
         </form>
 
-
-        <div class="ui feed">
-          <div class="event" v-for="tweet in tweets">
-            <div class="label">
-              <img v-bind:src="tweet.user.profile_image_url">
-            </div>
-            <div class="content">
-              <div class="date">
-                {{ tweet.created_at }}
+        <div class="results">
+          <h3 class="results-header" v-if="keyword != null && errors.length == 0 && isLoading == false">
+            Result for twitter handle {{ this.keyword }}:</h3>
+          <div class="ui feed">
+            <div class="event" v-for="tweet in tweets">
+              <div class="label">
+                <img v-bind:src="tweet.user.profile_image_url">
               </div>
-              <div class="summary">
-                 {{ tweet.text }}
+              <div class="content">
+                <div class="date">
+                  {{ tweet.created_at }}
+                </div>
+                <div class="summary">
+                   {{ tweet.text }}
+                </div>
               </div>
             </div>
           </div>
@@ -85,6 +88,7 @@
         }
 
         this.errors = [];
+        this.tweets = [];
 
         if (!this.keyword) {
           this.errors.push('Twitter handle is required.');

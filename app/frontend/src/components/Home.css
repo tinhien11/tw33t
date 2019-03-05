@@ -41,49 +41,25 @@
   margin-top: 3em;
 }
 
-.ui.vertical.stripe .floated.image {
-  clear: both;
-}
-
-.ui.vertical.stripe p {
-  font-size: 1.33em;
-}
-
-.ui.vertical.stripe .horizontal.divider {
-  margin: 3em 0em;
-}
-
-.quote.stripe.segment {
-  padding: 0em;
-}
-
-.quote.stripe.segment .grid .column {
-  padding-top: 5em;
-  padding-bottom: 5em;
-}
-
 .ui.big.icon.input{
   width: 60%;
 }
-
 
 .ui.big.icon.input input{
   padding-top: 0.61em;
 }
 
+.results{
+  margin-top: 2em;
+}
+
+.results-header{
+  text-align: left;
+}
 
 @media only screen and (max-width: 700px) {
   .ui.fixed.menu {
     display: none !important;
-  }
-
-  .secondary.pointing.menu .item,
-  .secondary.pointing.menu .menu {
-    display: none;
-  }
-
-  .secondary.pointing.menu .toc.item {
-    display: block;
   }
 
   .masthead.segment {
