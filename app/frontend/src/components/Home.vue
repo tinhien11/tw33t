@@ -22,6 +22,23 @@
           </div>
           <button class="ui huge primary button">Search <i class="right arrow icon"></i></button>
         </form>
+
+
+        <div class="ui feed">
+          <div class="event" v-for="tweet in tweets">
+            <div class="label">
+              <img v-bind:src="tweet.user.profile_image_url">
+            </div>
+            <div class="content">
+              <div class="date">
+                {{ tweet.created_at }}
+              </div>
+              <div class="summary">
+                 {{ tweet.text }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
