@@ -24,8 +24,8 @@
         </form>
 
         <div class="results">
-          <h3 class="results-header" v-if="keyword != null && errors.length == 0 && isLoading == false">
-            Result for twitter handle {{ this.keyword }}:</h3>
+          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length == 0">No tweets for twitter handle {{ this.keyword }}</h3>
+          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length > 0">Results for twitter handle {{ this.keyword }}:</h3>
           <div class="ui feed">
             <div class="event" v-for="tweet in tweets" :key="tweet.id">
               <div class="label">
@@ -57,7 +57,8 @@
         errors: [],
         keyword: null,
         tweets: [],
-        isLoading: false
+        isLoading: false,
+        isSubmit: false
       }
     },
     methods: {
@@ -80,8 +81,9 @@
           })
       },
       checkForm () {
-        this.errors = []
-        this.isLoading = true
+        this.errors = [];
+        this.isSubmit = true;
+        this.isLoading = true;
         if (this.keyword) {
           this.getTweets()
           return true
@@ -93,7 +95,7 @@
         if (!this.keyword) {
           this.errors.push('Twitter handle is required.')
         }
-        this.isLoading = false
+        // this.isLoading = false
       }
     },
     created () {
