@@ -24,8 +24,8 @@
         </form>
 
         <div class="results">
-          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length == 0">No tweets for twitter handle {{ this.keyword }}</h3>
-          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length > 0">Results for twitter handle {{ this.keyword }}:</h3>
+          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length == 0 && errors.length == 0">No tweets for twitter handle {{ this.keyword }}</h3>
+          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length > 0 && errors.length == 0">Results for twitter handle {{ this.keyword }}:</h3>
           <div class="ui feed">
             <div class="event" v-for="tweet in tweets" :key="tweet.id">
               <div class="label">
