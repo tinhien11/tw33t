@@ -11,7 +11,7 @@
         <form method="get" @submit.prevent="checkForm">
           <div v-if="errors.length">
             <ul>
-              <div class="ui visible red message" v-for="error in errors">
+              <div class="ui visible red message" v-for="(error, k) in errors" :key="k">
                 <p>{{ error }}</p>
               </div>
             </ul>
@@ -27,7 +27,7 @@
           <h3 class="results-header" v-if="keyword != null && errors.length == 0 && isLoading == false">
             Result for twitter handle {{ this.keyword }}:</h3>
           <div class="ui feed">
-            <div class="event" v-for="tweet in tweets">
+            <div class="event" v-for="tweet in tweets" :key="tweet.id">
               <div class="label">
                 <img v-bind:src="tweet.user.profile_image_url">
               </div>
@@ -36,7 +36,7 @@
                   {{ tweet.created_at }}
                 </div>
                 <div class="summary">
-                   {{ tweet.text }}
+                  {{ tweet.text }}
                 </div>
               </div>
             </div>
@@ -52,51 +52,51 @@
   import './Home.css'
 
   export default {
-    data() {
+    data () {
       return {
         errors: [],
         keyword: null,
         tweets: [],
-        isLoading: false,
+        isLoading: false
       }
     },
     methods: {
-      getTweets() {
+      getTweets () {
         this.tweets = this.getTweetsFromBackend()
       },
-      getTweetsFromBackend() {
-        const keyword = this.keyword;
-        const path = `${process.env.API_URL}/tweets/?user=${keyword}&count=3`;
-        let self = this;
+      getTweetsFromBackend () {
+        const keyword = this.keyword
+        const path = `${process.env.API_URL}/tweets/?user=${keyword}&count=3`
+        let self = this
         axios.get(path)
           .then(response => {
             this.tweets = response.data
           })
           .catch(error => {
-            this.errors.push(error);
+            this.errors.push(error)
           })
           .then(function () {
-            self.isLoading = false;
-          });
+            self.isLoading = false
+          })
       },
-      checkForm() {
-        this.errors = [];
-        this.isLoading = true;
+      checkForm () {
+        this.errors = []
+        this.isLoading = true
         if (this.keyword) {
-          this.getTweets();
-          return true;
+          this.getTweets()
+          return true
         }
 
-        this.errors = [];
-        this.tweets = [];
+        this.errors = []
+        this.tweets = []
 
         if (!this.keyword) {
-          this.errors.push('Twitter handle is required.');
+          this.errors.push('Twitter handle is required.')
         }
-        this.isLoading = false;
-      },
+        this.isLoading = false
+      }
     },
-    created() {
+    created () {
     }
   }
 </script>
