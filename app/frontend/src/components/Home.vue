@@ -2,9 +2,6 @@
   <div class="pusher">
     <div class="ui vertical masthead center aligned segment">
       <div class="ui container">
-        <!--<div class="ui large secondary menu">-->
-          <!--<a class="active item">Home</a>-->
-        <!--</div>-->
       </div>
       <div class="ui text container">
         <h1 class="ui header">
@@ -56,7 +53,7 @@
             this.tweets = response.data
           })
           .catch(error => {
-            this.errors.push('Error.');
+            this.errors.push(error);
           })
           .then(function () {
             self.isLoading = false;
