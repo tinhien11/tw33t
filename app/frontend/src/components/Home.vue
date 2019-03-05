@@ -25,7 +25,7 @@
 
         <div class="results">
           <h3 class="results-header" v-if="isSubmit && tweets && tweets.length == 0 && errors.length == 0">No tweets for twitter handle {{ this.keyword }}</h3>
-          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length > 0 && errors.length == 0">Results for twitter handle {{ this.keyword }}:</h3>
+          <h3 class="results-header" v-if="isSubmit && tweets && tweets.length > 0 && errors.length == 0">Results for this twitter handle:</h3>
           <div class="ui feed">
             <div class="event" v-for="tweet in tweets" :key="tweet.id">
               <div class="label">
@@ -74,7 +74,14 @@
             this.tweets = response.data
           })
           .catch(error => {
-            this.errors.push(error)
+            if(error.response.status === 404){
+              this.errors.push("Twitter handle not found")
+            }else if (error.response.status === 401){
+              this.errors.push("Permission denied for this Twitter handle")
+            }else{
+              this.errors.push(error)
+            }
+
           })
           .then(function () {
             self.isLoading = false
