@@ -4,3 +4,6 @@ import os
 DEBUG = True
 
 
+TWITTER_TOKEN = os.environ['TWITTER_TOKEN']
+TWITTER_TOKEN_SECRET = os.environ['TWITTER_TOKEN_SECRET']
+TWITTER_HANDLE_FILENAME_LOG = 'twitter_handle.log'
