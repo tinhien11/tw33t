@@ -18,9 +18,10 @@ def catch_all(path):
 class TweetsAPI(MethodView):
     def get(self):
         twitter_handle = request.args.get('user')
+        count = request.args.get('count', 10)
         try:
             logger_twitter_handle.info(twitter_handle)
-            twitters = twitter11.statuses.user_timeline(screen_name=twitter_handle)
+            twitters = twitter11.statuses.user_timeline(screen_name=twitter_handle, count=count)
             return jsonify(twitters)
         except TwitterHTTPError as err:
             abort(err.e.code)

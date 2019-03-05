@@ -66,7 +66,7 @@
       },
       getTweetsFromBackend() {
         const keyword = this.keyword;
-        const path = `${process.env.API_URL}/tweets/?user=${keyword}`;
+        const path = `${process.env.API_URL}/tweets/?user=${keyword}&count=3`;
         let self = this;
         axios.get(path)
           .then(response => {
