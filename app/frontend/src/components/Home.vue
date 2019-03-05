@@ -95,7 +95,7 @@
         if (!this.keyword) {
           this.errors.push('Twitter handle is required.')
         }
-        // this.isLoading = false
+        this.isLoading = false
       }
     },
     created () {
